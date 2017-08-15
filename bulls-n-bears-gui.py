@@ -189,14 +189,14 @@ class Quant(wx.Frame):
     def __init__(self, parent, title):
         super(Quant, self).__init__(parent, title=title, size=(300, 250))
 
-        BMP = wx.Image("bull_n_bear1.jpg").ConvertToBitmap()
+        BMP = wx.Image("images/bull_n_bear1.jpg").ConvertToBitmap()
         dc = wx.MemoryDC()
         dc.SelectObject(BMP)
         self.splash = GaugeSplash(BMP)
         self.splash.CenterOnScreen()
         self.splash.Show()
         wx.Yield()
-        self.loc = wx.IconLocation('program_icon.ico',0)
+        self.loc = wx.IconLocation('images/program_icon.ico',0)
         self.SetIcon(wx.IconFromLocation(self.loc))
         self.InitUI()
         self.anim = animation.FuncAnimation(self.figure1, self.animate, interval=60003)    # Intervals: 10min
@@ -207,7 +207,7 @@ class Quant(wx.Frame):
 
 
     def show_splash(self):
-        bitmap = wx.Image("bull_n_bear1.jpg").ConvertToBitmap()
+        bitmap = wx.Image("images/bull_n_bear1.jpg").ConvertToBitmap()
 
         splash = wx.SplashScreen(bitmap, wx.SPLASH_CENTRE_ON_SCREEN | wx.SPLASH_NO_TIMEOUT, 0, None, -1,
                                  wx.DefaultPosition, wx.DefaultSize, wx.BORDER_NONE)
@@ -944,4 +944,3 @@ def main():
 if __name__ == '__main__':
     main()
 #--------------------------------------------------------------------------------------
-
