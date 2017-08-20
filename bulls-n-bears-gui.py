@@ -167,16 +167,13 @@ def B_to_billions(value):
     return num
 
 def k_or_m(num_str):
-    korm, interval = '', ''
+    korm, interval = '', num_str
     if num_str > 1000 and num_str <= 1000000:
         korm = 'K'
         interval = num_str / 1000
-    if num_str > 1000000:
+    elif num_str > 1000000:
         korm = 'M'
         interval = num_str / 1000000
-    if num_str <= 1000:
-        korm = ''
-        interval = num_str
     return korm, interval
 
 
@@ -184,7 +181,6 @@ def k_or_m(num_str):
 '''
     GUI
 '''
-
 class Quant(wx.Frame):
     def __init__(self, parent, title):
         super(Quant, self).__init__(parent, title=title, size=(300, 250))
@@ -252,117 +248,116 @@ class Quant(wx.Frame):
         #     print pointer.fetchone()
 
     def InitUI(self):
-
         self.no_rept_count = 0
         self.tickerlookup = {
-            'AAL' : 'American Airlines Group, Inc.',
-            'AAPL': 'Apple',
-            'ADBE': 'Adobe Systems Incorporated',
-            'ADI' : 'Analog Devices, Inc. ',
-            'ADP' : 'Automatic Data Processing, Inc.',
-            'ADSK': 'Autodesk, Inc.',
-            'AKAM': 'Akamai Technologies',
-            'ALXN': 'Alexion Pharmaceuticals, Inc.',
-            'AMAT': 'Applied Materials, Inc.',
-            'AMGN': 'Amgen Inc.',
-            'AMZN': 'Amazon.com',
-            'ATVI': 'Activision Blizzard, Inc.',
-            'AVGO': 'Broadcom Limited',
-            'BBBY': 'Bed Bath & Beyond Inc.',
-            'BIDU': 'Baidu, Inc.',
-            'BIIB': 'Biogen, Inc.',
-            'BLDP': 'Ballard Power',
-            'BMRN': 'BioMarin Pharmaceutical, Inc.',
-            'CA'  : 'CA, Inc.',
-            'CELG': 'Celgene Corporation',
-            'CERN': 'Cerner Corporation',
-            'CHKP': 'Check Point Software Technologies, Ltd.',
-            'CHTR': 'Charter Communications, Inc.',
+            'AAL'  : 'American Airlines Group, Inc.',
+            'AAPL' : 'Apple',
+            'ADBE' : 'Adobe Systems Incorporated',
+            'ADI'  : 'Analog Devices, Inc. ',
+            'ADP'  : 'Automatic Data Processing, Inc.',
+            'ADSK' : 'Autodesk, Inc.',
+            'AKAM' : 'Akamai Technologies',
+            'ALXN' : 'Alexion Pharmaceuticals, Inc.',
+            'AMAT' : 'Applied Materials, Inc.',
+            'AMGN' : 'Amgen Inc.',
+            'AMZN' : 'Amazon.com',
+            'ATVI' : 'Activision Blizzard, Inc.',
+            'AVGO' : 'Broadcom Limited',
+            'BBBY' : 'Bed Bath & Beyond Inc.',
+            'BIDU' : 'Baidu, Inc.',
+            'BIIB' : 'Biogen, Inc.',
+            'BLDP' : 'Ballard Power',
+            'BMRN' : 'BioMarin Pharmaceutical, Inc.',
+            'CA'   : 'CA, Inc.',
+            'CELG' : 'Celgene Corporation',
+            'CERN' : 'Cerner Corporation',
+            'CHKP' : 'Check Point Software Technologies, Ltd.',
+            'CHTR' : 'Charter Communications, Inc.',
             'CMCSA': 'Comcast Corporation',
-            'COST': 'Costco Wholesale Corporation',
-            'CSCO': 'Cisco Systems, Inc.',
-            'CSX' : 'CSX Corporation',
-            'CTRP': 'Ctrip.com International, Ltd.',
-            'CTSH': 'Cognizant Technology Solutions Corporation',
-            'CTXS': 'Citrix Systems, Inc.',
+            'COST' : 'Costco Wholesale Corporation',
+            'CSCO' : 'Cisco Systems, Inc.',
+            'CSX'  : 'CSX Corporation',
+            'CTRP' : 'Ctrip.com International, Ltd.',
+            'CTSH' : 'Cognizant Technology Solutions Corporation',
+            'CTXS' : 'Citrix Systems, Inc.',
             'DISCA': 'Discovery Communications, Inc.',
             'DISCK': 'Discovery Communications, Inc.',
-            'DISH': 'Dish Network Corporation',
-            'DLTR': 'Dollar Tree, Inc.',
-            'EA'  : 'Electronic Arts, Inc.',
-            'EBAY': 'Ebay Inc',
-            'ESRX': 'Express Scrips Holding Company',
-            'EXPE': 'Expedia, Inc.',
-            'FAST': 'Fastenal Company',
-            'FB'  : 'Facebook',
-            'FISV': 'Fiserv, Inc.',
-            'FOX' : 'Twenty-First Century Fox, Inc.',
-            'FOXA': 'Twenty-First Century Fox, Inc.',
-            'GILD': 'Gilead Sciences, Inc.',
-            'GOOG': 'Google',
-            'HSIC': 'Henry Schein, Inc.',
-            'ILMN': 'Illumina, Inc.',
-            'INCY': 'Incyte Corporation',
-            'INTC': 'Intel Corporation',
-            'INTU': 'Intuit, Inc.',
-            'ISRG': 'Intuitive Surgical, Inc.',
-            'JD'  : 'JD.com, Inc.',
-            'KHC' : 'The Kraft Heinz Company',
+            'DISH' : 'Dish Network Corporation',
+            'DLTR' : 'Dollar Tree, Inc.',
+            'EA'   : 'Electronic Arts, Inc.',
+            'EBAY' : 'Ebay Inc',
+            'ESRX' : 'Express Scrips Holding Company',
+            'EXPE' : 'Expedia, Inc.',
+            'FAST' : 'Fastenal Company',
+            'FB'   : 'Facebook',
+            'FISV' : 'Fiserv, Inc.',
+            'FOX'  : 'Twenty-First Century Fox, Inc.',
+            'FOXA' : 'Twenty-First Century Fox, Inc.',
+            'GILD' : 'Gilead Sciences, Inc.',
+            'GOOG' : 'Google',
+            'HSIC' : 'Henry Schein, Inc.',
+            'ILMN' : 'Illumina, Inc.',
+            'INCY' : 'Incyte Corporation',
+            'INTC' : 'Intel Corporation',
+            'INTU' : 'Intuit, Inc.',
+            'ISRG' : 'Intuitive Surgical, Inc.',
+            'JD'   : 'JD.com, Inc.',
+            'KHC'  : 'The Kraft Heinz Company',
             'LBTYA': 'Liberty Global plc',
             'LBTYK': 'Liberty Global plc',
-            'LLTC': 'Linear Technology Corporation',
-            'LRCX': 'Lam Research Corporation',
+            'LLTC' : 'Linear Technology Corporation',
+            'LRCX' : 'Lam Research Corporation',
             'LVNTA': 'Liberty Interactive Corporation',
-            'MAR' : 'Marriot International',
-            'MAT' : 'Mattel, Inc.',
-            'MCHP': 'Microchip Technology Incorporated',
-            'MDLZ': 'Mondelez Interational',
-            'MNST': 'Monster Beverage Corporation',
-            'MRVL': 'Marval',
-            'MSFT': 'Microsoft',
-            'MU'  : 'Micron Technology',
-            'MXIM': 'Maxim Integrated Products, Inc.',
-            'MYL' : 'Mylan N.V.',
-            'NCLH': 'Norwegian Cruise Line Holdings Ltd.',
-            'NFLX': 'Netflix',
-            'NTAP': 'NetApp, Inc.',
-            'NTES': 'NetEase, Inc',
-            'NVDA': 'Nvidia',
-            'NXPI': 'NXP Semiconductors N.V.',
-            'ORLY': 'O\'Reilly Automotive, Inc.',
-            'PAYX': 'Paychex, Inc.',
-            'PCAR': 'PACCAR, Inc.',
-            'PCLN': 'The Priceline Group, Inc.',
-            'PYPL': 'PayPal Holdings, Inc.',
-            'QCOM': 'QUALCOMM Incorporated',
-            'QVCA': 'Liverty Interactive Corporation',
-            'REGN': 'Regeneron Pharmaceuticals, Inc.',
-            'ROST': 'Ross Stores, Inc.',
-            'SBAC': 'SBA Communications Corporation',
-            'PLUG': 'Plug Power',
-            'SNE' : 'Sony',
-            'SBUX': 'Starbucks',
-            'SIRI': 'Serius XM Holdings Inc.',
-            'SRCL': 'Stericycle, Inc.',
-            'STX' : 'Seagate Technology PLC',
-            'SWKS': 'Skyworks Solutions, Inc.',
-            'SYMC': 'Symantec Corporation',
-            'TMUS': 'T-Mobile US, Inc.',
-            'TRIP': 'TripAdvisor, Inc',
-            'TSCO': 'Tractor Supply Company',
-            'TSLA': 'Tesla Motors, Inc.',
-            'TXN' : 'Texas Instruments Incorporated',
-            'ULTA': 'Ulta Salon, Cosmetics & Fragrance, Inc.',
-            'VIAB': 'Biacom Inc.',
-            'VOD' : 'Vodafone Group Plc',
-            'VRSK': 'Verisk Analytics, Inc.',
-            'VRTX': 'Vertex Pharmaceuticals Incorporated',
-            'WBA' : 'Wallgreens Boots Alliance, Inc.',
-            'WDC' : 'Western Digital Corporation',
-            'WFM' : 'Whole Foods Market, Inc.',
-            'XLNX': 'Xilinx, Inc.',
-            'XRAY': 'DENTSPLY SIRONA, Inc.',
-            'YHOO': 'Yahoo! Inc.'
+            'MAR'  : 'Marriot International',
+            'MAT'  : 'Mattel, Inc.',
+            'MCHP' : 'Microchip Technology Incorporated',
+            'MDLZ' : 'Mondelez Interational',
+            'MNST' : 'Monster Beverage Corporation',
+            'MRVL' : 'Marval',
+            'MSFT' : 'Microsoft',
+            'MU'   :  'Micron Technology',
+            'MXIM' : 'Maxim Integrated Products, Inc.',
+            'MYL'  : 'Mylan N.V.',
+            'NCLH' : 'Norwegian Cruise Line Holdings Ltd.',
+            'NFLX' : 'Netflix',
+            'NTAP' : 'NetApp, Inc.',
+            'NTES' : 'NetEase, Inc',
+            'NVDA' : 'Nvidia',
+            'NXPI' : 'NXP Semiconductors N.V.',
+            'ORLY' : 'O\'Reilly Automotive, Inc.',
+            'PAYX' : 'Paychex, Inc.',
+            'PCAR' : 'PACCAR, Inc.',
+            'PCLN' : 'The Priceline Group, Inc.',
+            'PYPL' : 'PayPal Holdings, Inc.',
+            'QCOM' : 'QUALCOMM Incorporated',
+            'QVCA' : 'Liverty Interactive Corporation',
+            'REGN' : 'Regeneron Pharmaceuticals, Inc.',
+            'ROST' : 'Ross Stores, Inc.',
+            'SBAC' : 'SBA Communications Corporation',
+            'PLUG' : 'Plug Power',
+            'SNE'  : 'Sony',
+            'SBUX' : 'Starbucks',
+            'SIRI' : 'Serius XM Holdings Inc.',
+            'SRCL' : 'Stericycle, Inc.',
+            'STX'  : 'Seagate Technology PLC',
+            'SWKS' : 'Skyworks Solutions, Inc.',
+            'SYMC' : 'Symantec Corporation',
+            'TMUS' : 'T-Mobile US, Inc.',
+            'TRIP' : 'TripAdvisor, Inc',
+            'TSCO' : 'Tractor Supply Company',
+            'TSLA' : 'Tesla Motors, Inc.',
+            'TXN'  : 'Texas Instruments Incorporated',
+            'ULTA' : 'Ulta Salon, Cosmetics & Fragrance, Inc.',
+            'VIAB' : 'Biacom Inc.',
+            'VOD'  : 'Vodafone Group Plc',
+            'VRSK' : 'Verisk Analytics, Inc.',
+            'VRTX' : 'Vertex Pharmaceuticals Incorporated',
+            'WBA'  : 'Wallgreens Boots Alliance, Inc.',
+            'WDC'  : 'Western Digital Corporation',
+            'WFM'  : 'Whole Foods Market, Inc.',
+            'XLNX' : 'Xilinx, Inc.',
+            'XRAY' : 'DENTSPLY SIRONA, Inc.',
+            'YHOO' : 'Yahoo! Inc.'
         }
 
 
@@ -418,10 +413,6 @@ class Quant(wx.Frame):
         # box1.Add(self.plt1_tc, pos=(0, 7), flag=wx.EXPAND | wx.ALL, border=5)
 
 
-
-
-
-
         box_for_box2 = wx.BoxSizer(wx.HORIZONTAL)
         plt2_text = wx.StaticText(self.panel, label='Company: ')
         box_for_box2.Add(plt2_text, flag=wx.ALIGN_CENTRE_HORIZONTAL, border=5)
@@ -461,7 +452,6 @@ class Quant(wx.Frame):
         '''
             MATPLOTLIB
         '''
-
         self.figure1 = plt.figure(figsize=(8, 5))
         self.figure2 = plt.figure(figsize=(8, 3))
         self.figure3 = plt.figure(figsize=(8, 5))
@@ -891,7 +881,7 @@ class Quant(wx.Frame):
     def animate(self, i):
         ticker = self.tickerlookup.keys()[self.tickerlookup.values().index(self.plt2_2.get_title())]
         print '#-----------------------------------#'
-        print '\t\t\tUPDATING IN PROGRESS'
+        print '\tUPDATING IN PROGRESS'
         print '#-----------------------------------#'
         if self.no_rept_count != 0:
             self.plt1_1update()
@@ -907,7 +897,7 @@ class Quant(wx.Frame):
             self.tick2_txt.SetLabel(ticker)
         self.no_rept_count += 1
         print '#-----------------------------------#'
-        print '\t\t\tUPDATING COMPLETE'
+        print '\tUPDATING COMPLETE'
         print '#-----------------------------------#'
 
 #--------------------------------------------------------------------------------------
@@ -943,4 +933,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
 #--------------------------------------------------------------------------------------
